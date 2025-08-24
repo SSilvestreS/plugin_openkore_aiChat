@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 echo ========================================
-echo    AI Chat Plugin - OpenKore Launcher
+echo    AI Chat Proxy - Standalone Launcher
 echo ========================================
 echo.
 
@@ -10,7 +10,7 @@ echo.
 cd /d "%~dp0"
 
 :: Check if Node.js is installed
-echo [1/4] Checking Node.js installation...
+echo [1/3] Checking Node.js installation...
 node --version >nul 2>&1
 if %errorlevel% neq 0 (
     echo ERROR: Node.js is not installed or not in PATH
@@ -24,7 +24,7 @@ node --version
 
 :: Check if dependencies are installed
 echo.
-echo [2/4] Checking dependencies...
+echo [2/3] Checking dependencies...
 if not exist "node_modules" (
     echo Installing Node.js dependencies...
     npm install
@@ -39,7 +39,7 @@ if not exist "node_modules" (
 
 :: Check if .env file exists
 echo.
-echo [3/4] Checking configuration...
+echo [3/3] Checking configuration...
 if not exist ".env" (
     echo WARNING: .env file not found
     echo Please copy env.example to .env and configure your API keys
@@ -58,49 +58,15 @@ if not exist ".env" (
 
 :: Start the AI Chat proxy
 echo.
-echo [4/4] Starting AI Chat Proxy...
-echo Starting proxy server on port 3000...
-start "AI Chat Proxy" /B node api_proxy.js
-
-:: Wait a moment for the proxy to start
-timeout /t 3 /nobreak >nul
-
-:: Check if proxy is running
-echo Checking if proxy is running...
-curl -s http://localhost:3000/status >nul 2>&1
-if %errorlevel% neq 0 (
-    echo WARNING: Proxy might not be running properly
-    echo Check the proxy console for errors
-) else (
-    echo ✓ Proxy server is running
-)
-
-:: Navigate to OpenKore directory and start it
+echo Starting AI Chat Proxy...
+echo Proxy will run on http://localhost:3000
 echo.
-echo Starting OpenKore...
-cd ..
-cd ..
-if exist "wxstart.exe" (
-    echo ✓ Starting OpenKore with wxstart.exe
-    start "" wxstart.exe
-) else if exist "start.exe" (
-    echo ✓ Starting OpenKore with start.exe
-    start "" start.exe
-) else (
-    echo WARNING: OpenKore executable not found
-    echo Please make sure you're running this from the correct directory
-)
-
+echo Available endpoints:
+echo - POST /proxy - AI chat requests
+echo - GET  /status - Server status
 echo.
-echo ========================================
-echo Setup complete! 
-echo.
-echo Next steps:
-echo 1. Make sure the proxy is running (check the console)
-echo 2. In OpenKore, type: plugins load aiChat
-echo 3. Configure your AI settings with: aichat help
-echo.
-echo For help, check the README.md file
+echo Press Ctrl+C to stop the proxy
 echo ========================================
 echo.
-pause
+
+node api_proxy.js

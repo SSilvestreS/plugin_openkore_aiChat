@@ -1,0 +1,88 @@
+# Logger Configuration Example
+# Copy this file to logger_config.pl and customize as needed
+
+# Logging levels: 0=DEBUG, 1=INFO, 2=WARN, 3=ERROR, 4=FATAL
+log_level = 1
+
+# Enable/disable file logging
+log_to_file = 1
+
+# Enable/disable console logging
+log_to_console = 1
+
+# Directory for log files
+log_file_path = logs
+
+# Prefix for log files
+log_file_prefix = aichat
+
+# Maximum file size in bytes (10MB)
+max_file_size = 10485760
+
+# Maximum number of log files to keep
+max_files = 5
+
+# Log format: json, text, or both
+log_format = json
+
+# Enable timestamps in logs
+enable_timestamps = 1
+
+# Enable context in logs
+enable_context = 1
+
+# Enable performance metrics
+enable_performance = 1
+
+# Custom log patterns
+log_patterns = {
+    # Context-specific logging
+    combat = {
+        level = 1,
+        include_performance = 1,
+        include_context = 1
+    },
+    
+    trading = {
+        level = 1,
+        include_performance = 0,
+        include_context = 1
+    },
+    
+    leveling = {
+        level = 1,
+        include_performance = 1,
+        include_context = 1
+    },
+    
+    # Error logging
+    errors = {
+        level = 3,
+        include_performance = 1,
+        include_context = 1,
+        include_stack_trace = 1
+    }
+}
+
+# Performance thresholds
+performance_thresholds = {
+    api_response_time = 5000,    # 5 seconds
+    cache_hit_rate = 0.8,       # 80%
+    memory_usage = 100000000,   # 100MB
+    context_update_time = 1000   # 1 second
+}
+
+# Log rotation schedule
+rotation_schedule = {
+    daily = 1,      # Rotate daily
+    size_based = 1, # Rotate when file size exceeds limit
+    time_based = 0  # Rotate at specific times
+}
+
+# Log retention policy
+retention_policy = {
+    keep_days = 30,           # Keep logs for 30 days
+    keep_size = 1073741824,   # Keep logs up to 1GB total
+    compress_old = 1,         # Compress old log files
+    archive_old = 1           # Archive very old logs
+}

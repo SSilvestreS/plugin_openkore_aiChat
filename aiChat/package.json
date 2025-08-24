@@ -1,0 +1,31 @@
+{
+  "name": "aichat-openkore-proxy",
+  "version": "1.0.0",
+  "description": "AI Chat Proxy for OpenKore - Node.js server to handle AI API requests",
+  "main": "api_proxy.js",
+  "scripts": {
+    "start": "node api_proxy.js",
+    "dev": "nodemon api_proxy.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "openkore",
+    "ai",
+    "chat",
+    "proxy",
+    "ragnarok"
+  ],
+  "author": "OpenKore AI Chat Plugin",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "node-fetch": "^2.7.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
